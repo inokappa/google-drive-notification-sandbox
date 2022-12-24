@@ -1,0 +1,7 @@
+version: "3.9"
+services:
+  python:
+    build: .
+    volumes:
+      - "../src:/work/src"
+    tty: true
