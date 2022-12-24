@@ -32,12 +32,12 @@ def create_channel():
         'address': ADDRESS
     }
     try:
-        watch_info = service.changes().watch(pageToken=page_token, body=body).execute()
-        print(watch_info.get('id'))
-        print(watch_info.get('resourceId'))
+        watch_info = service.changes().watch(
+            pageToken=page_token, body=body).execute()
+        print('ID: %s' % watch_info.get('id'))
+        print('Resource ID: %s' % watch_info.get('resourceId'))
     except errors.HttpError as error:
-      print('An error occurred: %s' % error)
-    return None
+        print('An error occurred: %s' % error)
 
 
 def stop_channel(channel_id, resource_id):
@@ -47,8 +47,7 @@ def stop_channel(channel_id, resource_id):
         'resourceId': resource_id
     }
     try:
-        stop_info = service.channels().stop(body=body).execute()
-        print(stop_info)
+        service.channels().stop(body=body).execute()
     except errors.HttpError as error:
         print('An error occurred: %s' % error)
 

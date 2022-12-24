@@ -38,12 +38,12 @@ def lambda_handler(event, context):
     service_account_info = json.loads(sa_json)
     credentials = service_account.Credentials.from_service_account_info(
         service_account_info, scopes=SCOPES)
-    
-    service = build('drive', 'v3', credentials=credentials, cache_discovery=False)
+    service = build('drive', 'v3',
+                    credentials=credentials, cache_discovery=False)
 
     page_token = get_page_token()
     response = service.changes().list(pageToken=page_token).execute()
-    
+
     for change in response.get('changes'):
         print('Change found for file: %s' % change.get('fileId'))
         if 'newStartPageToken' in response:
